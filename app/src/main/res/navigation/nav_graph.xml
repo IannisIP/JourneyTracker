@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/traseeFragment">
+
+    <fragment
+        android:id="@+id/traseeFragment"
+        android:name="journey.project.fragments.TraseeFragment"
+        android:label="@string/app_title"
+        tools:layout="@layout/fragment_trasee" />
+    <fragment
+        android:id="@+id/traseuNouFragment"
+        android:name="journey.project.fragments.TraseuNouFragment"
+        android:label="@string/traseu_nou_fragment_label"
+        tools:layout="@layout/fragment_traseu_nou" />
+    <fragment
+        android:id="@+id/despreFragment"
+        android:name="journey.project.fragments.DespreFragment"
+        android:label="@string/despre_fragment_label"
+        tools:layout="@layout/fragment_despre" />
+    <fragment
+        android:id="@+id/setariFragment"
+        android:name="journey.project.fragments.SetariFragment"
+        android:label="@string/setari_fragment_label"
+        tools:layout="@layout/fragment_setari" />
+   <!--23.04.2020 - adaugat pentru componeta de navigare-->
+    <fragment
+        android:id="@+id/detaliiTraseuFragment"
+        android:name="journey.project.fragments.DetaliiTraseuFragment"
+        android:label="@string/detalii_fragment_label"
+        tools:layout="@layout/fragment_detalii_traseu" />
+</navigation>

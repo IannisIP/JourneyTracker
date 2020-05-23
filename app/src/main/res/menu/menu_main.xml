@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="journey.project.activities.MainActivity">
+    <item
+        android:id="@+id/action_trasee"
+        android:orderInCategory="100"
+        android:title="@string/action_trasee"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_traseu_nou"
+        android:orderInCategory="100"
+        android:title="@string/action_traseu_nou"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_setari"
+        android:orderInCategory="100"
+        android:title="@string/action_setari"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_despre"
+        android:orderInCategory="100"
+        android:title="@string/action_despre"
+        app:showAsAction="never" />
+</menu>
