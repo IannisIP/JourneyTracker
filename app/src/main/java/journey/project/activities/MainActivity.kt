@@ -37,7 +37,7 @@ Exemplificari in cadrul aplicatiei:
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     Communicator, SensorEventListener {
-
+//test
     lateinit var navController: NavController
     lateinit var coordinatorLayout: CoordinatorLayout
     private var mSensorManager: SensorManager? = null
