@@ -16,11 +16,11 @@ import java.util.*
 class TraseeAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerView.Adapter<TraseeAdapter.VH>() {
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
-        val textViewDenumire: TextView = view.findViewById(R.id.textViewDenumire)
-        val textViewDataInceput: TextView = view.findViewById(R.id.textViewDataInceput)
-        val textViewDataIncheiere: TextView = view.findViewById(R.id.textViewDataIncheiere)
-        val textViewDurata: TextView = view.findViewById(R.id.textViewDurata)
-        val textViewViteza: TextView = view.findViewById(R.id.textViewViteza)
+        val textViewDenumire: TextView = view.findViewById(R.id.textViewLocationName)
+        val textViewDataInceput: TextView = view.findViewById(R.id.textViewLocationVecinity)
+//        val textViewDataIncheiere: TextView = view.findViewById(R.id.textViewDataIncheiere)
+//        val textViewDurata: TextView = view.findViewById(R.id.textViewDurata)
+//        val textViewViteza: TextView = view.findViewById(R.id.textViewViteza)
     }
 
     lateinit var recycler: RecyclerView
@@ -57,9 +57,6 @@ class TraseeAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerV
         holder.textViewDenumire.text = traseuCuPuncte.traseu.denumire
         holder.textViewDataInceput.text =
             SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(traseuCuPuncte.traseu.dataInceput)
-        holder.textViewDataIncheiere.text = SimpleDateFormat(
-            "dd-MM-yyyy HH:mm:ss",
-            Locale.getDefault()
-        ).format(traseuCuPuncte.traseu.dataIncheiere)
+
     }
 }

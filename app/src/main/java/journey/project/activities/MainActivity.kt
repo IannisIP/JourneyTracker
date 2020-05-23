@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //butonul  FAB va fi vizibil doar in fragmentul principal (lista traseelor)
         fab.setOnClickListener { view ->
             fab.setVisibility(View.GONE)
-            navController.navigate(R.id.traseuNouFragment)
+            navController.navigate(R.id.suggestionsFragment)
         }
 
         coordinatorLayout = findViewById(R.id.coordinatorLayout)

@@ -31,4 +31,16 @@
         android:name="journey.project.fragments.DetaliiTraseuFragment"
         android:label="@string/detalii_fragment_label"
         tools:layout="@layout/fragment_detalii_traseu" />
+
+    <fragment
+        android:id="@+id/travelNoteFragment"
+        android:name="journey.project.fragments.TravelNoteFragment"
+        android:label="@string/add_travel_note_fragment_label"
+        tools:layout="@layout/fragment_add_travel_note" />
+
+    <fragment
+        android:id="@+id/suggestionsFragment"
+        android:name="journey.project.fragments.PlacesSuggestionFragment"
+        android:label="@string/suggestions_fragment_label"
+        tools:layout="@layout/fragment_sugestionslist" />
 </navigation>

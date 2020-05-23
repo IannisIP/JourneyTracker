@@ -13,6 +13,8 @@
     <string name="despre_fragment_label">Despre aplicatie</string>
     <string name="setari_fragment_label">Setari aplicatie</string>
     <string name="detalii_fragment_label">Detalii traseu</string>
+    <string name="add_travel_note_fragment_label">Add Travel Note</string>
+    <string name="suggestions_fragment_label">Location Suggestions</string>
 
     <string name="autori">Autorii (PDM)</string>
 
