@@ -46,11 +46,7 @@ class AddNewTravelNoteFragment : Fragment() {
         val country = arguments?.getString("country")
         val address = arguments?.getString("address")
         val locality = arguments?.getString("locality")
-        Log.d("GeoC", country)
-        Log.d("GeoA", address)
-        Log.d("GeoL", locality)
-
-
+ 
         btnSave.setOnClickListener(){
             val note = TravelNote()
             note.Name = editTextName.text.toString()
@@ -59,6 +55,9 @@ class AddNewTravelNoteFragment : Fragment() {
             note.UserRating = ratingBar.rating
             note.Latitude = coordinates?.latitude!!
             note.Longitude = coordinates?.longitude!!
+            note.Country = country!!
+            note.Address = address!!
+            note.Locality = locality!!
 
             dbRepository!!.insertNote(note)
 

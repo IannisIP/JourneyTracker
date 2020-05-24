@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,9 @@ class TravelNotesAdapter(private val travelNotes: MutableList<TravelNote>) : Rec
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
         val textViewLocationName: TextView = view.findViewById(R.id.textViewLocationName)
-        val textViewLocationVecinity: TextView = view.findViewById(R.id.textViewLocationVecinity)
+        val textViewNoteDate: TextView = view.findViewById(R.id.textViewNoteDate)
+        val textViewLocation: TextView = view.findViewById(R.id.textViewCountry)
+        val ratingBar: RatingBar = view.findViewById(R.id.locationRating)
     }
 
     lateinit var recycler: RecyclerView
@@ -49,7 +52,9 @@ class TravelNotesAdapter(private val travelNotes: MutableList<TravelNote>) : Rec
     override fun onBindViewHolder(holder: VH, index: Int) {
         val note: TravelNote = travelNotes[index]
         holder.textViewLocationName.text = note.Name
-        holder.textViewLocationVecinity.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(note.Date)
-
+        holder.textViewNoteDate.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(note.Date)
+        holder.textViewLocation.text = note.Country + ", " + note.Locality + ", "+note.Address
+        holder.ratingBar.isEnabled = false
+        holder.ratingBar.setRating(note.UserRating)
     }
 }
