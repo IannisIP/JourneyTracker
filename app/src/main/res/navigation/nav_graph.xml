@@ -25,9 +25,8 @@
         android:name="journey.project.fragments.SettingsFragment"
         android:label="@string/settings_label"
         tools:layout="@layout/fragment_settings" />
-   <!--23.04.2020 - adaugat pentru componeta de navigare-->
     <fragment
-        android:id="@+id/detaliiTraseuFragment"
+        android:id="@+id/travelNoteInfoFragment"
         android:name="journey.project.fragments.TravelNoteInfoFragment"
         android:label="@string/travel_note_info_label"
         tools:layout="@layout/fragment_travel_note_info" />

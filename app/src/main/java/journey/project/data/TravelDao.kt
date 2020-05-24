@@ -16,6 +16,6 @@ abstract class TravelDao {
 
     @Transaction
     @Query("select * from travelnotes")
-    abstract fun queryNotes() : LiveData<MutableList<TravelNote>>
+    abstract fun queryNotes() : MutableList<TravelNote>
 
 }

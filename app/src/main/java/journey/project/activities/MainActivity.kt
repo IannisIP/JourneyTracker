@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
 
         mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager?;
-        mTemperature= mSensorManager?.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE); // requires API level 14.
+        mTemperature= mSensorManager?.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
 
         snackbar = Snackbar.make(coordinatorLayout, "Not yet computed", Snackbar.LENGTH_INDEFINITE)
         

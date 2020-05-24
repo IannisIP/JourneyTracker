@@ -14,7 +14,7 @@ class DbRepository(context: Context) {
         travelDao = dbContext.getTravelDao()
     }
 
-    fun getNotes(): LiveData<MutableList<TravelNote>> {
+    fun getNotes(): MutableList<TravelNote> {
         return travelDao.queryNotes()
     }
 
