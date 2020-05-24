@@ -11,10 +11,10 @@
         android:label="@string/app_title"
         tools:layout="@layout/fragment_all_travel_notes" />
     <fragment
-        android:id="@+id/traseuNouFragment"
+        android:id="@+id/newTravelFragment"
         android:name="journey.project.fragments.AddNewTravelNoteFragment"
         android:label="@string/add_new_travel_note_label"
-        tools:layout="@layout/fragment_traseu_nou" />
+        tools:layout="@layout/fragment_add_travel_note" />
     <fragment
         android:id="@+id/despreFragment"
         android:name="journey.project.fragments.AboutAppFragment"

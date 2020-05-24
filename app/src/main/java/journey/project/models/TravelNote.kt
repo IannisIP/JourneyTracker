@@ -13,10 +13,10 @@ data class TravelNote(@PrimaryKey(autoGenerate=true)var LocationId: Long = 0) : 
     lateinit var  Date : Date
     var Latitude : Double = 0.0
     var Longitude : Double = 0.0
-    var UserRating : Double = 0.0
+    var UserRating : Float = 0f
 
     constructor( locationId : Long = 0, name: String, note : String,
-                 date : Date, lat: Double, long: Double, userRating: Double) : this(locationId) {
+                 date : Date, lat: Double, long: Double, userRating: Float) : this(locationId) {
         this.Name = name
         this.Note = note
         this.Date = date

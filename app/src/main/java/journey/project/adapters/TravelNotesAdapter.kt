@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import journey.project.R
-import journey.project.data.TraseuCuPuncte
+import journey.project.models.TravelNote
 import java.text.SimpleDateFormat
 import java.util.*
 
 //Adaptorul pentru lista traseelor (RecyclerView)
-class TravelNotesAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerView.Adapter<TravelNotesAdapter.VH>() {
+class TravelNotesAdapter(private val trasee: MutableList<TravelNote>) : RecyclerView.Adapter<TravelNotesAdapter.VH>() {
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
         val textViewDenumire: TextView = view.findViewById(R.id.textViewLocationName)
@@ -52,11 +52,11 @@ class TravelNotesAdapter(private val trasee: MutableList<TraseuCuPuncte>) : Recy
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val traseuCuPuncte: TraseuCuPuncte = trasee[position]
+        val note: TravelNote = trasee[position]
 
-        holder.textViewDenumire.text = traseuCuPuncte.traseu.denumire
+        holder.textViewDenumire.text = note.Name
         holder.textViewDataInceput.text =
-            SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(traseuCuPuncte.traseu.dataInceput)
+            SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(note.Date)
 
     }
 }

@@ -90,7 +90,7 @@ class ServiciuLocalizare : Service() {
         val pendingIntent = NavDeepLinkBuilder(this)
             .setComponentName(MainActivity::class.java)
             .setGraph(R.navigation.nav_graph)
-            .setDestination(R.id.traseuNouFragment)
+            .setDestination(R.id.newTravelFragment)
             .setArguments(bundle)
             .createPendingIntent()
 

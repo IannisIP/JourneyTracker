@@ -16,5 +16,8 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="celsius">℃</string>
+    <string name="confirm_location">Confirm location</string>
+    <string name="hint_location_name">Location name</string>
+    <string name="hint_notes">Notes</string>
 
 </resources>

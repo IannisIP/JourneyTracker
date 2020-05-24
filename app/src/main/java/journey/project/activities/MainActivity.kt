@@ -1,6 +1,5 @@
 package journey.project.activities
 
-//toate componentele cu id vor fi accesibile din cod direct, fara declarare si apel findViewById
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -12,32 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import journey.project.R
-import journey.project.data.DatabaseTrasee
-import journey.project.data.TraseuCuPuncte
-import journey.project.services.Communicator
 
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
 
-/*
-6 aprilie 2020
-
-Exemplificari in cadrul aplicatiei:
-    - Material Design
-    - DrawerLayout, NavigationView
-    - Fragmente
-    - RecyclerView
-    - Android Jetpack Navigation
- */
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    Communicator, SensorEventListener {
-//test
     lateinit var navController: NavController
     lateinit var coordinatorLayout: CoordinatorLayout
     private var mSensorManager: SensorManager? = null
@@ -53,7 +35,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationUI.setupActionBarWithNavController(this, navController, drawer)
         navigationView.setNavigationItemSelectedListener(this)
 
-        //butonul  FAB va fi vizibil doar in fragmentul principal (lista traseelor)
         fab.setOnClickListener { view ->
             fab.setVisibility(View.GONE)
             navController.navigate(R.id.suggestionsFragment)
@@ -72,11 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         snackbar!!.show()
     }
 
-    //tratare optiuni meniu
-    //butonul  FAB va fi vizibil doar in fragmentul principal (lista traseelor)
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
-
         drawer.closeDrawers()
 
         val id = item.itemId
@@ -89,7 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.action_traseu_nou -> {
                 fab.setVisibility(View.GONE)
-                navController.navigate(R.id.traseuNouFragment)
+                navController.navigate(R.id.newTravelFragment)
                 return true
             }
             R.id.action_despre -> {
@@ -121,32 +98,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun passDataCom(traseu: TraseuCuPuncte) {
-        DatabaseTrasee.getInstanta(this)?.getDaoTrasee()?.insereazaTraseuCuPuncte(traseu)
-
-        //val bundle = Bundle()
-        //bundle.putSerializable("traseu", traseu)
-
-        //val transaction = this.supportFragmentManager.beginTransaction()
-        //val frag2 = TraseeFragment()
-        //frag2.arguments = bundle
-
-        //transaction.replace(R.id.fragmentTrasee, frag2)
-        //transaction.addToBackStack(null)
-        //navController.popBackStack()
-        //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        //transaction.commit()
-
-        //O alta abordare
-        //Golim stiva de fragmente si reafisam lista traseelor
-        val navOption = NavOptions.Builder().setPopUpTo(R.id.allTravelNotesFragment, true).build()
-        navController
-            .navigate(R.id.allTravelNotesFragment, null, navOption)
-        fab.setVisibility(View.VISIBLE)
-    }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Do something here if sensor accuracy changes.
     }
 
     override fun onSensorChanged(event: SensorEvent?) {

@@ -16,6 +16,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -25,7 +28,10 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import journey.project.R
 import journey.project.services.ServiciuLocalizare
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_location_selector.*
+import kotlinx.android.synthetic.main.fragment_traseu_nou.*
+import java.util.*
 
 
 class LocationSelectFragment : Fragment(), OnMapReadyCallback {
@@ -34,11 +40,15 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
     lateinit var thisContext: Context
     var serviciuPornit = false
     var currentUserLoation : LatLng? = null
+    lateinit var navController: NavController
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+
         val view = inflater.inflate(R.layout.fragment_location_selector, container, false)
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
@@ -50,7 +60,6 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         thisContext = this.requireActivity()
-        //daca nu exista, solicitam permisiunea ACCESS_FINE_LOCATION
         if (ContextCompat.checkSelfPermission(
                 thisContext,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -58,21 +67,28 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
         ) {
             ActivityCompat.requestPermissions(thisContext as FragmentActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
         }
-        val intent = Intent(activity, ServiciuLocalizare::class.java) //Serviciu
+        val intent = Intent(activity, ServiciuLocalizare::class.java)
 
-        btn_confirm_location.text = "Confirm location"
+        btn_confirm_location.text = getString(R.string.confirm_location)
+
+        btn_confirm_location.setOnClickListener() {
+            val bundle = Bundle()
+            bundle.putParcelable("currentUserLoation", currentUserLoation)
+            navController.navigate(R.id.newTravelFragment, bundle)
+
+        }
 
         if (!serviciuPornit) {
             thisContext.startService(intent)
-            Toast.makeText(thisContext, "Serviciul a pornit", Toast.LENGTH_LONG).show();
             serviciuPornit = !serviciuPornit
         }
+
     }
 
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-        val intent = Intent(activity, ServiciuLocalizare::class.java) //Serviciu
+        val intent = Intent(activity, ServiciuLocalizare::class.java)
 
         if (!serviciuPornit) {
             thisContext.startService(intent)

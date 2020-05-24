@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_all_travel_notes.*
 import journey.project.R
 import journey.project.adapters.TravelNotesAdapter
-import journey.project.data.DatabaseTrasee
-import journey.project.data.TraseuCuPuncte
+import journey.project.data.TravelDb
 import java.util.*
 
 //Fragmentul principal; afiseaza lista traseele definite
@@ -31,25 +30,17 @@ class AllTravelNotesFragment : Fragment() {
         val data = Date()
         val calendar = Calendar.getInstance()
         calendar.time =  data
-
-        val listaTrasee: MutableList<TraseuCuPuncte>? = DatabaseTrasee.getInstanta(requireContext())?.getDaoTrasee()?.selecteazaToateTraseele()
-        /*
-        val listaTrasee : MutableList<Traseu> = mutableListOf<Traseu>()
-        listaTrasee.clear()
-
-        if (traseuNou != null) {
-            listaTrasee.add(traseuNou)
-        }
-
-         */
-        val traseeAdapter = TravelNotesAdapter(listaTrasee!!)
-                //asociere adaptro
-        recylerTrasee.adapter = traseeAdapter
-        //lista verticala
-        recylerTrasee.layoutManager = LinearLayoutManager(context)
-        //separator elemente
-        recylerTrasee.addItemDecoration(DividerItemDecoration(context,
-            DividerItemDecoration.VERTICAL))
+//
+//        val listaTrasee: MutableList<TraseuCuPuncte>? = TravelDb.getInstanta(requireContext())?.getDaoTrasee()?.selecteazaToateTraseele()
+//
+//        val traseeAdapter = TravelNotesAdapter(listaTrasee!!)
+//                //asociere adaptro
+//        recylerTrasee.adapter = traseeAdapter
+//        //lista verticala
+//        recylerTrasee.layoutManager = LinearLayoutManager(context)
+//        //separator elemente
+//        recylerTrasee.addItemDecoration(DividerItemDecoration(context,
+//            DividerItemDecoration.VERTICAL))
 
 
     }
