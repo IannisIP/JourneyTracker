@@ -6,6 +6,8 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
@@ -15,13 +17,16 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.google.android.gms.location.*
 import journey.project.activities.MainActivity
 import journey.project.R
+import java.util.*
 
 class ServiciuLocalizare : Service() {
     val interval: Long = 10000 //10 sec
-    val fastestInterval: Long = 2000 //5 sec
+    val fastestInterval: Long = 2000 //2 sec
     var fusedLocationProviderClient: FusedLocationProviderClient? = null
 
     val locationRequest = LocationRequest()
+    lateinit var context: Context
+
 
     //prin intermediul acestui obiect se preiau coordonatele
     val locationCallback = object : LocationCallback() {
@@ -29,9 +34,19 @@ class ServiciuLocalizare : Service() {
             super.onLocationResult(locationResult)
 
             val loc = locationResult?.lastLocation
+
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val address = geocoder.getFromLocation(loc?.latitude!!, loc.longitude, 1)
+
             val intent = Intent("ACTION_COORD")
-            //TODO: de analizat frecventa de trasmitere a mesajelor si posbilitati de optmizare
-            intent.putExtra("COORD", "${loc?.latitude}, ${loc?.longitude}")
+            intent.putExtra("COORD", "${loc.latitude}, ${loc.longitude}")
+
+            if(address != null && address.isNotEmpty()) {
+                intent.putExtra("Country", "${address[0].countryName}")
+                intent.putExtra("Locality", "${address[0].locality}")
+                intent.putExtra("Address", "${address[0].thoroughfare}")
+            }
+
             sendBroadcast(intent)
         }
     }
@@ -48,6 +63,8 @@ class ServiciuLocalizare : Service() {
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            context = this
+
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
             startLocalizare()
             //se poate afisa si o notificare pentru a arata ca serviciul ruleaza
@@ -99,7 +116,7 @@ class ServiciuLocalizare : Service() {
             .setContentTitle(getString(R.string.app_title))
             .setContentText("Descriere...")
             .setContentIntent(pendingIntent)
-            .build();
+            .build()
 
         startForeground(1, notification)
     }

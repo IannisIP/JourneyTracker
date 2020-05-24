@@ -43,7 +43,12 @@ class AddNewTravelNoteFragment : Fragment() {
         editTextNotes.hint = getString(R.string.hint_notes)
 
         val coordinates = arguments?.getParcelable("currentUserLoation") as LatLng?
-        Log.d("coord", coordinates?.latitude.toString() + coordinates?.longitude.toString());
+        val country = arguments?.getString("country")
+        val address = arguments?.getString("address")
+        val locality = arguments?.getString("locality")
+        Log.d("GeoC", country)
+        Log.d("GeoA", address)
+        Log.d("GeoL", locality)
 
 
         btnSave.setOnClickListener(){

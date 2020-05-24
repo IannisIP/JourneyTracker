@@ -41,6 +41,9 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
     var serviciuPornit = false
     var currentUserLoation : LatLng? = null
     lateinit var navController: NavController
+    var country = "Country not detected."
+    var address = "Address not detected."
+    var locality = "Locality not detected."
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -74,8 +77,11 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
         btn_confirm_location.setOnClickListener() {
             val bundle = Bundle()
             bundle.putParcelable("currentUserLoation", currentUserLoation)
-            navController.navigate(R.id.newTravelFragment, bundle)
+            bundle.putString("address", address)
+            bundle.putString("locality", locality)
+            bundle.putString("country", country)
 
+            navController.navigate(R.id.newTravelFragment, bundle)
         }
 
         if (!serviciuPornit) {
@@ -92,7 +98,7 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
 
         if (!serviciuPornit) {
             thisContext.startService(intent)
-            Toast.makeText(thisContext, "Serviciul a pornit", Toast.LENGTH_LONG).show();
+            Toast.makeText(thisContext, "Serviciul a pornit", Toast.LENGTH_LONG).show()
             serviciuPornit = !serviciuPornit
         }
         thisContext.registerReceiver(receptorLocatie, IntentFilter("ACTION_COORD"))
@@ -122,11 +128,22 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
     val receptorLocatie = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val coord = intent?.getStringExtra("COORD")
+            val adrs = intent?.getStringExtra("Address")
+            val localy = intent?.getStringExtra("Locality")
+            val ctry = intent?.getStringExtra("Country")
 
             if (coord != null) {
-                currentUserLoation =
-                    LatLng(coord.split(",")[0].toDouble(), coord.split(",")[1].toDouble())
+                currentUserLoation = LatLng(coord.split(",")[0].toDouble(), coord.split(",")[1].toDouble())
             };
+            if(adrs != null) {
+                address = adrs
+            }
+            if(localy != null) {
+                locality = localy
+            }
+            if(ctry != null) {
+                country = ctry
+            }
         }
     }
 
@@ -136,7 +153,7 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
                 map.clear()
                 map.addMarker(MarkerOptions().position(it).title("Current location"))
                 map.moveCamera(CameraUpdateFactory.newLatLng(it))
-                map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+                map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) )
 
                 currentUserLoation = it
             })
@@ -149,7 +166,7 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
                             MarkerOptions().position(currentUserLoation!!).title("Current location")
                         )
                         map.moveCamera(CameraUpdateFactory.newLatLng(currentUserLoation))
-                        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+                        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) )
                     }
                 },2000
             )
