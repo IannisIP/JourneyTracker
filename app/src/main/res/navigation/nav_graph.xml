@@ -3,34 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/traseeFragment">
+    app:startDestination="@id/allTravelNotesFragment">
 
     <fragment
-        android:id="@+id/traseeFragment"
-        android:name="journey.project.fragments.TraseeFragment"
+        android:id="@+id/allTravelNotesFragment"
+        android:name="journey.project.fragments.AllTravelNotesFragment"
         android:label="@string/app_title"
-        tools:layout="@layout/fragment_trasee" />
+        tools:layout="@layout/fragment_all_travel_notes" />
     <fragment
         android:id="@+id/traseuNouFragment"
-        android:name="journey.project.fragments.TraseuNouFragment"
-        android:label="@string/traseu_nou_fragment_label"
+        android:name="journey.project.fragments.AddNewTravelNoteFragment"
+        android:label="@string/add_new_travel_note_label"
         tools:layout="@layout/fragment_traseu_nou" />
     <fragment
         android:id="@+id/despreFragment"
-        android:name="journey.project.fragments.DespreFragment"
-        android:label="@string/despre_fragment_label"
-        tools:layout="@layout/fragment_despre" />
+        android:name="journey.project.fragments.AboutAppFragment"
+        android:label="@string/about_app_label"
+        tools:layout="@layout/fragment_about_app" />
     <fragment
         android:id="@+id/setariFragment"
-        android:name="journey.project.fragments.SetariFragment"
-        android:label="@string/setari_fragment_label"
-        tools:layout="@layout/fragment_setari" />
+        android:name="journey.project.fragments.SettingsFragment"
+        android:label="@string/settings_label"
+        tools:layout="@layout/fragment_settings" />
    <!--23.04.2020 - adaugat pentru componeta de navigare-->
     <fragment
         android:id="@+id/detaliiTraseuFragment"
-        android:name="journey.project.fragments.DetaliiTraseuFragment"
-        android:label="@string/detalii_fragment_label"
-        tools:layout="@layout/fragment_detalii_traseu" />
+        android:name="journey.project.fragments.TravelNoteInfoFragment"
+        android:label="@string/travel_note_info_label"
+        tools:layout="@layout/fragment_travel_note_info" />
 
     <fragment
         android:id="@+id/travelNoteFragment"

@@ -28,7 +28,7 @@ import java.util.*
 //TODO: de analizat comportamentul, atunci cind fragmentul nu este vizibil (de ex. s-a apasat pe butonul Home) si serviciul este pornit
 //TODO: la revenirea in acest fragment, ar trebui, daca serviciul ruleaza, sa restauram starea (denumirea afisata, butonul start dezactivat, stop activat etc.)
 //Initiere traseu nou
-class TraseuNouFragment : Fragment() {
+class AddNewTravelNoteFragment : Fragment() {
     val COD_PERMISUNE = 1
     lateinit var thisContext: Context
     var serviciuPornit = false

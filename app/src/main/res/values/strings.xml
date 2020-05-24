@@ -1,22 +1,16 @@
 <resources>
     <string name="app_name">Journey Tracker</string>
     <string name="app_title">Journey Tracker</string>
-
-    <!-- intrari meniu -->
-
-    <string name="action_trasee">Lista trasee</string>
-    <string name="action_traseu_nou">Traseu nou</string>
-    <string name="action_despre">Despre</string>
-    <string name="action_setari">Setari</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="traseu_nou_fragment_label">Traseu nou</string>
-    <string name="despre_fragment_label">Despre aplicatie</string>
-    <string name="setari_fragment_label">Setari aplicatie</string>
-    <string name="detalii_fragment_label">Detalii traseu</string>
+    <string name="action_alltravelnotes">My Travel Notes</string>
+    <string name="action_addnewtravelnote">New Travel Note</string>
+    <string name="action_aboutapp">About App</string>
+    <string name="action_setting">Settings</string>
+    <string name="add_new_travel_note_label">Add Travel Note</string>
+    <string name="about_app_label">About App</string>
+    <string name="settings_label">Settings</string>
+    <string name="travel_note_info_label">Travel Note Info</string>
     <string name="add_travel_note_fragment_label">Add Travel Note</string>
     <string name="suggestions_fragment_label">Location Suggestions</string>
-
-    <string name="autori">Autorii (PDM)</string>
 
     <string name="hint_denumirea">Denumirea traseului</string>
     <string name="start">Start</string>

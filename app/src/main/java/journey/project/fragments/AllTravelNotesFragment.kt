@@ -7,22 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_trasee.*
+import kotlinx.android.synthetic.main.fragment_all_travel_notes.*
 import journey.project.R
-import journey.project.adapters.TraseeAdapter
+import journey.project.adapters.TravelNotesAdapter
 import journey.project.data.DatabaseTrasee
 import journey.project.data.TraseuCuPuncte
 import java.util.*
 
 //Fragmentul principal; afiseaza lista traseele definite
-class TraseeFragment : Fragment() {
+class AllTravelNotesFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trasee, container, false)
+        return inflater.inflate(R.layout.fragment_all_travel_notes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class TraseeFragment : Fragment() {
         }
 
          */
-        val traseeAdapter = TraseeAdapter(listaTrasee!!)
+        val traseeAdapter = TravelNotesAdapter(listaTrasee!!)
                 //asociere adaptro
         recylerTrasee.adapter = traseeAdapter
         //lista verticala

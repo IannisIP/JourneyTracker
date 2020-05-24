@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.action_trasee -> {
                 fab.setVisibility(View.VISIBLE)
-                navController.navigate(R.id.traseeFragment)
+                navController.navigate(R.id.allTravelNotesFragment)
                 return true
             }
             R.id.action_traseu_nou -> {
@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //O alta abordare
         //Golim stiva de fragmente si reafisam lista traseelor
-        val navOption = NavOptions.Builder().setPopUpTo(R.id.traseeFragment, true).build()
+        val navOption = NavOptions.Builder().setPopUpTo(R.id.allTravelNotesFragment, true).build()
         navController
-            .navigate(R.id.traseeFragment, null, navOption)
+            .navigate(R.id.allTravelNotesFragment, null, navOption)
         fab.setVisibility(View.VISIBLE)
     }
 

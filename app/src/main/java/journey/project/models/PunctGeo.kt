@@ -13,3 +13,4 @@ data class PunctGeo(var latid : Double = 0.0,
     var id: Long = 0
     var idTraseu: Long = 0
 }
+

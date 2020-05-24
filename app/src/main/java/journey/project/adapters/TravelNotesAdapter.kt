@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 //Adaptorul pentru lista traseelor (RecyclerView)
-class TraseeAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerView.Adapter<TraseeAdapter.VH>() {
+class TravelNotesAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerView.Adapter<TravelNotesAdapter.VH>() {
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
         val textViewDenumire: TextView = view.findViewById(R.id.textViewLocationName)
@@ -32,7 +32,7 @@ class TraseeAdapter(private val trasee: MutableList<TraseuCuPuncte>) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         //23.04.2020 - Evenimentul click pe element din lista
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.linie_traseu, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.listview_item, parent, false)
 
         view.setOnClickListener(object : View.OnClickListener {
 

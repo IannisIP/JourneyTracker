@@ -5,21 +5,21 @@
     <item
         android:id="@+id/action_trasee"
         android:orderInCategory="100"
-        android:title="@string/action_trasee"
+        android:title="@string/action_alltravelnotes"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_traseu_nou"
         android:orderInCategory="100"
-        android:title="@string/action_traseu_nou"
+        android:title="@string/action_addnewtravelnote"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_setari"
         android:orderInCategory="100"
-        android:title="@string/action_setari"
+        android:title="@string/action_setting"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_despre"
         android:orderInCategory="100"
-        android:title="@string/action_despre"
+        android:title="@string/action_aboutapp"
         app:showAsAction="never" />
 </menu>

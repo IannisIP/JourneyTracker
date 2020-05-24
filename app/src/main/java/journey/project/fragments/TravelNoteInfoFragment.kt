@@ -13,12 +13,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import journey.project.R
-import kotlinx.android.synthetic.main.fragment_detalii_traseu.*
+import kotlinx.android.synthetic.main.fragment_travel_note_info.*
 import journey.project.data.TraseuCuPuncte
 import journey.project.models.PunctGeo
 
 //23.04.2020 - Detalii traseu selectat
-class DetaliiTraseuFragment : Fragment(), OnMapReadyCallback {
+class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
 
     lateinit var mapView: MapView
     var traseu : TraseuCuPuncte? = null
@@ -28,7 +28,7 @@ class DetaliiTraseuFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_detalii_traseu, container, false)
+        val view = inflater.inflate(R.layout.fragment_travel_note_info, container, false)
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)

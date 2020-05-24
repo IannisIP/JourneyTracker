@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.PolylineOptions
 import journey.project.R
 import journey.project.data.TraseuCuPuncte
 import journey.project.models.PunctGeo
-import kotlinx.android.synthetic.main.fragment_detalii_traseu.*
+import kotlinx.android.synthetic.main.fragment_travel_note_info.*
 
 class TravelNoteFragment : Fragment(), OnMapReadyCallback {
 
@@ -27,7 +27,7 @@ class TravelNoteFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_detalii_traseu, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_travel_note, container, false)
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
