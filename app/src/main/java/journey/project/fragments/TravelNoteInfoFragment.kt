@@ -43,6 +43,7 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
         textViewTitle.text = note?.Name
         textViewLocation.text = note?.Country + ", " + note?.Locality + ", " + note?.Address
         editTextNote.setText(note?.Note)
+        editTextNote.isEnabled = false
     }
 
     override fun onResume() {
