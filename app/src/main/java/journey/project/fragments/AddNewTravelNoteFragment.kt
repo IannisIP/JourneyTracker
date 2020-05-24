@@ -1,9 +1,7 @@
 package journey.project.fragments
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +11,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.google.android.gms.maps.model.LatLng
 import journey.project.R
-import journey.project.activities.MainActivity
 import journey.project.data.DbRepository
-import journey.project.data.TravelDb
 import journey.project.models.TravelNote
 import kotlinx.android.synthetic.main.fragment_add_travel_note.*
 import java.util.*
@@ -62,9 +58,7 @@ class AddNewTravelNoteFragment : Fragment() {
             dbRepository!!.insertNote(note)
 
             val navOption = NavOptions.Builder().setPopUpTo(R.id.allTravelNotesFragment, true).build()
-            navController
-                .navigate(R.id.allTravelNotesFragment, null, navOption)
-
+            navController.navigate(R.id.allTravelNotesFragment, null, navOption)
         }
     }
 

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -73,6 +74,8 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
         val intent = Intent(activity, ServiciuLocalizare::class.java)
 
         btn_confirm_location.text = getString(R.string.confirm_location)
+
+        btn_confirm_location.isEnabled = false
 
         btn_confirm_location.setOnClickListener() {
             val bundle = Bundle()
@@ -156,19 +159,33 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
                 map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) )
 
                 currentUserLoation = it
+
+                val geocoder = Geocoder(thisContext, Locale.getDefault())
+                val locObj = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+
+                if(locObj != null && locObj.isNotEmpty()) {
+                    address = locObj[0].countryName
+                    locality = locObj[0].locality
+                    address = locObj[0].thoroughfare
+                }
+
+                if(currentUserLoation != null)
+                    btn_confirm_location.isEnabled = true
             })
 
 
             Handler().postDelayed(
                 {
-                    if(currentUserLoation != null) {
-                        map.addMarker(
-                            MarkerOptions().position(currentUserLoation!!).title("Current location")
-                        )
-                        map.moveCamera(CameraUpdateFactory.newLatLng(currentUserLoation))
-                        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) )
-                    }
-                },2000
+                        if(currentUserLoation != null) {
+                            map.addMarker(
+                                MarkerOptions().position(currentUserLoation!!).title("Current location")
+                            )
+                            map.moveCamera(CameraUpdateFactory.newLatLng(currentUserLoation))
+                            map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) )
+                            btn_confirm_location.isEnabled = true
+
+                        }
+                    },2000
             )
         }
     }
