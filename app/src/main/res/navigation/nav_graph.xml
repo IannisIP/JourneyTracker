@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/suggestionsFragment"
-        android:name="journey.project.fragments.PlacesSuggestionFragment"
+        android:name="journey.project.fragments.LocationSelectFragment"
         android:label="@string/suggestions_fragment_label"
-        tools:layout="@layout/fragment_sugestionslist" />
+        tools:layout="@layout/fragment_location_selector" />
 </navigation>
