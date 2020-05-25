@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import journey.project.R
 import journey.project.data.DbRepository
-import journey.project.data.SampleContentProvider
 import kotlinx.android.synthetic.main.fragment_travel_note_info.*
 import journey.project.models.TravelNote
 
@@ -53,7 +52,8 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
 
 
         buttonUpdate.setOnClickListener() {
-            dbRepository?.updateNote(this!!.note!!)
+            note?.Note = editTextNote.text.toString()
+            dbRepository?.updateNote(note!!)
             navController.navigate(R.id.allTravelNotesFragment)
         }
 

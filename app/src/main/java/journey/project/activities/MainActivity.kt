@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
@@ -26,6 +27,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var mTemperature: Sensor? = null
     private val NOT_SUPPORTED_MESSAGE = "Sorry, temperature sensor not available for this device."
     var snackbar : Snackbar? = null
+
+    val listener =
+        NavController.OnDestinationChangedListener() { navController: NavController, navDestination: NavDestination, bundle: Bundle? ->
+            if (navDestination.id == R.id.allTravelNotesFragment) {
+                fab.visibility = View.VISIBLE
+            } else {
+                fab.visibility = View.GONE
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -131,10 +142,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
         mSensorManager!!.registerListener(this, mTemperature, SensorManager.SENSOR_DELAY_NORMAL)
+        navController.addOnDestinationChangedListener(listener)
     }
 
     override fun onPause() {
         super.onPause()
         mSensorManager!!.unregisterListener(this)
+        navController.removeOnDestinationChangedListener(listener)
     }
 }
