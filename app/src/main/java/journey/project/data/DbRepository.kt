@@ -21,4 +21,12 @@ class DbRepository(context: Context) {
     fun insertNote(note: TravelNote): Long {
         return travelDao.insertNote(note)
     }
+
+    fun deleteNote(id: Long) {
+        travelDao.deleteById(id)
+    }
+
+    fun updateNote(note: TravelNote){
+        travelDao.updateTravelNote(note)
+    }
 }

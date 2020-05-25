@@ -11,7 +11,7 @@ class SampleContentProvider : ContentProvider() {
         const val AUTHORITY = "journey.project.data"
 
         /** The URI for the TravelNote table.  */
-        val URI_CHEESE = Uri.parse(
+        val URI_TRAVELNOTES = Uri.parse(
             "content://$AUTHORITY/travelnotes"
         )
 

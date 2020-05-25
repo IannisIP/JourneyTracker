@@ -1,10 +1,13 @@
 package journey.project.fragments
 
+import android.content.ContentResolver
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -13,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import journey.project.R
 import journey.project.data.DbRepository
+import journey.project.data.SampleContentProvider
 import kotlinx.android.synthetic.main.fragment_travel_note_info.*
 import journey.project.models.TravelNote
 
@@ -21,6 +25,8 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
     lateinit var mapView: MapView
     var dbRepository: DbRepository? = null
     var note : TravelNote? = null
+    lateinit var navController: NavController
+    var contentResolver : ContentResolver? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +34,10 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         dbRepository = DbRepository(requireContext())
         val view = inflater.inflate(R.layout.fragment_travel_note_info, container, false)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+
+        contentResolver = requireContext().contentResolver;
+
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -40,7 +50,17 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
         textViewTitle.text = note?.Name
         textViewLocation.text = note?.Country + ", " + note?.Locality + ", " + note?.Address
         editTextNote.setText(note?.Note)
-        editTextNote.isEnabled = false
+
+
+        buttonUpdate.setOnClickListener() {
+            dbRepository?.updateNote(this!!.note!!)
+            navController.navigate(R.id.allTravelNotesFragment)
+        }
+
+        buttonDelete.setOnClickListener() {
+            dbRepository?.deleteNote(note?.LocationId!!)
+            navController.navigate(R.id.allTravelNotesFragment)
+        }
     }
 
     override fun onResume() {
