@@ -10,13 +10,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
 import journey.project.R
 import journey.project.data.DbRepository
 import kotlinx.android.synthetic.main.fragment_travel_note_info.*
-import journey.project.models.PunctGeo
 import journey.project.models.TravelNote
 
 class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {

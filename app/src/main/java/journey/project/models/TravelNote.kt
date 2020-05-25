@@ -1,5 +1,6 @@
 package journey.project.models
 
+import android.content.ContentValues
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
@@ -31,4 +32,16 @@ data class TravelNote(@PrimaryKey(autoGenerate=true)var LocationId: Long = 0) : 
         this.Locality = locality
     }
 
+    companion object {
+        fun fromContentValues(values: ContentValues?): TravelNote? {
+            val travelnote = TravelNote()
+            if (values != null && values.containsKey("LocationId")) {
+                travelnote.LocationId = values.getAsLong("LocationId")
+            }
+            if (values != null && values.containsKey("Name")) {
+                travelnote.Name = values.getAsString("Name")
+            }
+            return travelnote
+        }
+    }
 }
