@@ -1,5 +1,7 @@
 package journey.project.fragments
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -56,6 +58,11 @@ class AddNewTravelNoteFragment : Fragment() {
             note.Locality = locality!!
 
             dbRepository!!.insertNote(note)
+
+            val ids = AppWidgetManager.getInstance(context).getAppWidgetIds(ComponentName(requireContext(),JourneyTrackerWidget::class.java))
+
+            val widgetPersonal = JourneyTrackerWidget()
+            widgetPersonal.onUpdate(requireContext(), AppWidgetManager.getInstance(requireContext()),ids);
 
             val navOption = NavOptions.Builder().setPopUpTo(R.id.allTravelNotesFragment, true).build()
             navController.navigate(R.id.allTravelNotesFragment, null, navOption)

@@ -31,14 +31,13 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    var last3TravelNotes : String? = null
+    var last3TravelNotes = ""
     var counter = 0
     var cursor = context.contentResolver.query(SampleContentProvider.URI_TRAVELNOTES,null, null, null,"Date DESC")
     if(cursor?.moveToFirst()!!){
         do{
-            last3TravelNotes += cursor.getString(1) +", "+ cursor.getString(3) +", "+  cursor.getString(5) + "\n"
-            counter++
-        }while (cursor.moveToNext() && counter <3 )
+            last3TravelNotes += cursor.getString(0) +", "+ cursor.getString(2) +", "+  cursor.getString(4) + "\n"
+        }while (cursor.moveToNext() )
     }
     var notesCount = cursor.count
 

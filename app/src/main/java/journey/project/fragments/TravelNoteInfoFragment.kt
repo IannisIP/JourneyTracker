@@ -1,5 +1,7 @@
 package journey.project.fragments
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.ContentResolver
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -43,6 +45,13 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
+    private fun updateWidget() {
+        val ids = AppWidgetManager.getInstance(context).getAppWidgetIds(ComponentName(requireContext(),JourneyTrackerWidget::class.java))
+
+        val widgetPersonal = JourneyTrackerWidget()
+        widgetPersonal.onUpdate(requireContext(), AppWidgetManager.getInstance(requireContext()),ids);
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         note = arguments?.getSerializable(travelNoteKey) as TravelNote?
@@ -52,11 +61,15 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
 
 
         buttonUpdate.setOnClickListener() {
+            updateWidget()
+
             dbRepository?.updateNote(note!!)
             navController.navigate(R.id.allTravelNotesFragment)
         }
 
         buttonDelete.setOnClickListener() {
+            updateWidget()
+
             dbRepository?.deleteNote(note?.LocationId!!)
             navController.navigate(R.id.allTravelNotesFragment)
         }
