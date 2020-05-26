@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 import journey.project.models.TravelNote
 
-@Database(entities = arrayOf(TravelNote::class), version = 2)
+@Database(entities = arrayOf(TravelNote::class), version = 1)
 @TypeConverters(Converter::class)
 abstract class TravelDb : RoomDatabase() {
     abstract fun getTravelDao(): TravelDao

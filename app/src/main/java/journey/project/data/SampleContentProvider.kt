@@ -7,33 +7,25 @@ import journey.project.models.TravelNote
 
 class SampleContentProvider : ContentProvider() {
     companion object {
-        /** The authority of this content provider.  */
         const val AUTHORITY = "journey.project.data"
-
-        /** The URI for the TravelNote table.  */
         val URI_TRAVELNOTES = Uri.parse(
-            "content://$AUTHORITY/travelnotes"
+            "content://"+ AUTHORITY+"/travelnotes"
         )
+        private const val CODE_ALL_TRAVEL_NOTES = 1
+        private const val CODE_TRAVEL_NOTE_ITEM = 2
 
-        /** The match code for some items in the Cheese table.  */
-        private const val CODE_CHEESE_DIR = 1
-
-        /** The match code for an item in the Cheese table.  */
-        private const val CODE_CHEESE_ITEM = 2
-
-        /** The URI matcher.  */
         private val MATCHER = UriMatcher(UriMatcher.NO_MATCH)
 
         init {
             MATCHER.addURI(
                 AUTHORITY,
                 "travelnotes",
-                CODE_CHEESE_DIR
+                CODE_ALL_TRAVEL_NOTES
             )
             MATCHER.addURI(
                 AUTHORITY,
                 "travelnotes" + "/*",
-                CODE_CHEESE_ITEM
+                CODE_TRAVEL_NOTE_ITEM
             )
         }
     }
@@ -47,14 +39,14 @@ class SampleContentProvider : ContentProvider() {
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
         val code = MATCHER.match(uri)
-        return if (code == CODE_CHEESE_DIR || code == CODE_CHEESE_ITEM) {
+        return if (code == CODE_ALL_TRAVEL_NOTES || code == CODE_TRAVEL_NOTE_ITEM) {
             val context = context ?: return null
             val TravelNote = TravelDb.getInstanta(context)?.getTravelDao()
 
             var cursor: Cursor? = null
             if (TravelNote != null) {
-                cursor = (if (code == CODE_CHEESE_DIR) {
-                    TravelNote.queryNotes()
+                cursor = (if (code == CODE_ALL_TRAVEL_NOTES) {
+                            TravelNote.selectAll()
                 } else {
                     TravelNote.loadSingle(ContentUris.parseId(uri))
                 }) as Cursor
@@ -68,15 +60,15 @@ class SampleContentProvider : ContentProvider() {
 
     override fun getType(uri: Uri): String? {
         return when (MATCHER.match(uri)) {
-            CODE_CHEESE_DIR -> "vnd.android.cursor.dir/" + AUTHORITY + "." + "travelnotes"
-            CODE_CHEESE_ITEM -> "vnd.android.cursor.item/" + AUTHORITY + "." + "travelnotes"
+            CODE_ALL_TRAVEL_NOTES -> "vnd.android.cursor.dir/" + AUTHORITY + "." + "travelnotes"
+            CODE_TRAVEL_NOTE_ITEM -> "vnd.android.cursor.item/" + AUTHORITY + "." + "travelnotes"
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         return when (MATCHER.match(uri)) {
-            CODE_CHEESE_ITEM -> {
+            CODE_TRAVEL_NOTE_ITEM -> {
                 val context = context ?: return null
                 val id: Long = (TravelDb.getInstanta(context)?.getTravelDao()
                     ?.insertNote(TravelNote.fromContentValues(values)!!) ?: context.contentResolver.notifyChange(uri, null )) as Long
@@ -91,10 +83,10 @@ class SampleContentProvider : ContentProvider() {
         selectionArgs: Array<String>?
     ): Int {
         return when (MATCHER.match(uri)) {
-            CODE_CHEESE_DIR -> throw IllegalArgumentException(
+            CODE_ALL_TRAVEL_NOTES -> throw IllegalArgumentException(
                 "Invalid URI, cannot update without ID$uri"
             )
-            CODE_CHEESE_ITEM -> {
+            CODE_TRAVEL_NOTE_ITEM -> {
                 val context = context ?: return 0
                 return (TravelDb.getInstanta(context)?.getTravelDao()
                     ?.deleteById(ContentUris.parseId(uri)) ?: context.contentResolver.notifyChange(uri, null )) as Int
@@ -108,10 +100,10 @@ class SampleContentProvider : ContentProvider() {
         selectionArgs: Array<String>?
     ): Int {
         return when (MATCHER.match(uri)) {
-            CODE_CHEESE_DIR -> throw IllegalArgumentException(
+            CODE_ALL_TRAVEL_NOTES -> throw IllegalArgumentException(
                 "Invalid URI, cannot update without ID$uri"
             )
-            CODE_CHEESE_ITEM -> {
+            CODE_TRAVEL_NOTE_ITEM -> {
                 val context = context ?: return 0
                 var count = 0
                 val travelnote: TravelNote? = TravelNote.fromContentValues(values)

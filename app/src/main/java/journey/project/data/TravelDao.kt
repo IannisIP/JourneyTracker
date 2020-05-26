@@ -1,5 +1,6 @@
 package journey.project.data
 
+import android.database.Cursor
 import androidx.room.*
 import journey.project.models.TravelNote
 
@@ -12,6 +13,9 @@ abstract class TravelDao {
     @Transaction
     @Query("select * from travelnotes")
     abstract fun queryNotes() : MutableList<TravelNote>
+
+    @Query("SELECT * FROM travelnotes")
+    abstract fun selectAll(): Cursor?
 
     @Query("SELECT * FROM travelnotes WHERE LocationId=:id ")
     abstract fun loadSingle(id: Long): TravelNote
