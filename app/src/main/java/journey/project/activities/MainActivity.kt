@@ -1,5 +1,6 @@
 package journey.project.activities
 
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -16,8 +17,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 import journey.project.R
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.ByteArrayOutputStream
+import java.io.ObjectOutputStream
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
 
@@ -61,7 +65,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (mTemperature == null) {
             setMessageOnSnackBar(NOT_SUPPORTED_MESSAGE)
         }
-        snackbar!!.show()
+
+        showSnackbar()
+    }
+
+    fun showSnackbar() {
+        val sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val isChecked = sharedPref.getBoolean("isChecked", true)
+
+        if(isChecked)
+            snackbar!!.show()
+        else
+            snackbar!!.dismiss()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -143,6 +158,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onResume()
         mSensorManager!!.registerListener(this, mTemperature, SensorManager.SENSOR_DELAY_NORMAL)
         navController.addOnDestinationChangedListener(listener)
+        showSnackbar()
     }
 
     override fun onPause() {
