@@ -19,19 +19,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import journey.project.R
 import journey.project.services.ServiciuLocalizare
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_location_selector.*
-import kotlinx.android.synthetic.main.fragment_traseu_nou.*
 import java.util.*
 
 
@@ -101,7 +97,6 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
 
         if (!serviciuPornit) {
             thisContext.startService(intent)
-            Toast.makeText(thisContext, "Serviciul a pornit", Toast.LENGTH_LONG).show()
             serviciuPornit = !serviciuPornit
         }
         thisContext.registerReceiver(receptorLocatie, IntentFilter("ACTION_COORD"))
@@ -110,11 +105,10 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-        val intent = Intent(activity, ServiciuLocalizare::class.java) //Serviciu
+        val intent = Intent(activity, ServiciuLocalizare::class.java)
 
         if (serviciuPornit) {
             thisContext.stopService(intent)
-            Toast.makeText(thisContext, "Serviciul a fost oprit", Toast.LENGTH_LONG).show()
             serviciuPornit = !serviciuPornit
         }
         thisContext.unregisterReceiver(receptorLocatie)
@@ -126,8 +120,6 @@ class LocationSelectFragment : Fragment(), OnMapReadyCallback {
         mapView.onDestroy()
     }
 
-    //receptor de mesaje
-    //primesate coordonatele de la serviciu si le afiseaza prin intermediul controlului dedicat
     val receptorLocatie = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val coord = intent?.getStringExtra("COORD")

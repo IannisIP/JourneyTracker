@@ -3,22 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="journey.project.activities.MainActivity">
     <item
-        android:id="@+id/action_trasee"
+        android:id="@+id/action_travelNotes"
         android:orderInCategory="100"
         android:title="@string/action_alltravelnotes"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_traseu_nou"
+        android:id="@+id/action_newTravelNote"
         android:orderInCategory="100"
         android:title="@string/action_addnewtravelnote"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_setari"
+        android:id="@+id/action_Settings"
         android:orderInCategory="100"
         android:title="@string/action_setting"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_despre"
+        android:id="@+id/action_About"
         android:orderInCategory="100"
         android:title="@string/action_aboutapp"
         app:showAsAction="never" />

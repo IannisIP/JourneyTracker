@@ -70,22 +70,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val id = item.itemId
 
         when (id) {
-            R.id.action_trasee -> {
+            R.id.action_travelNotes -> {
                 fab.setVisibility(View.VISIBLE)
                 navController.navigate(R.id.allTravelNotesFragment)
                 return true
             }
-            R.id.action_traseu_nou -> {
+            R.id.action_newTravelNote -> {
                 fab.setVisibility(View.GONE)
                 navController.navigate(R.id.newTravelFragment)
                 return true
             }
-            R.id.action_despre -> {
+            R.id.action_About -> {
                 fab.setVisibility(View.GONE)
                 navController.navigate(R.id.despreFragment)
                 return true
             }
-            R.id.action_setari -> {
+            R.id.action_Settings -> {
                 fab.setVisibility(View.GONE)
                 navController.navigate(R.id.setariFragment)
                 return true

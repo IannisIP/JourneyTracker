@@ -28,8 +28,6 @@ class TravelNoteFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        traseu = arguments?.getSerializable("TRASEU") as TraseuCuPuncte?
-//        textViewInfoTraseu.text = traseu?.traseu?.denumire
     }
 
     override fun onResume() {

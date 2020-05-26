@@ -20,15 +20,13 @@ import journey.project.R
 import java.util.*
 
 class ServiciuLocalizare : Service() {
-    val interval: Long = 10000 //10 sec
-    val fastestInterval: Long = 2000 //2 sec
+    val interval: Long = 10000
+    val fastestInterval: Long = 2000
     var fusedLocationProviderClient: FusedLocationProviderClient? = null
 
     val locationRequest = LocationRequest()
     lateinit var context: Context
 
-
-    //prin intermediul acestui obiect se preiau coordonatele
     val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
             super.onLocationResult(locationResult)
@@ -57,7 +55,6 @@ class ServiciuLocalizare : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        //oprim automat serviciul daca nu avem permisiunea ACCESS_FINE_LOCATION
         if (ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -67,28 +64,21 @@ class ServiciuLocalizare : Service() {
 
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
             startLocalizare()
-            //se poate afisa si o notificare pentru a arata ca serviciul ruleaza
-            //Notification si NotificationManager
+
         } else
             stopSelf()
     }
 
-    //se apeleaza pentru fiecare invocare startService
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-        //24-04-2020 - in onStartCommand putem prelua parametrii trasnmisi prin intent
 
         creeazaSiAfiseazaNotificarea()
 
         return super.onStartCommand(intent, flags, startId)
 
     }
-    //24.04.2020 - afisare notificare la pornire serviciu
     fun creeazaSiAfiseazaNotificarea() {
 
         val notificationManager =  getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        //pentru Android O
         val channelId = "serv_loc"
 
         if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -99,11 +89,7 @@ class ServiciuLocalizare : Service() {
             );
             notificationManager.createNotificationChannel(channel)
         }
-        // include argumentele pe care le va primi fragmentul traseuNouFragment, pentru a restaura starea constroalelor
         val bundle = Bundle()
-        //TODO: de populat obiectul de tip Bundle in vederea restaurarii fragmentului TraseuNou
-
-        //utilizat la intereactiunea cu notificarea -> se va deschide fragmentul TraseuNou
         val pendingIntent = NavDeepLinkBuilder(this)
             .setComponentName(MainActivity::class.java)
             .setGraph(R.navigation.nav_graph)
@@ -112,7 +98,7 @@ class ServiciuLocalizare : Service() {
             .createPendingIntent()
 
         val notification = NotificationCompat.Builder(this, "serv_loc")
-            .setSmallIcon(R.drawable.ic_add_white_24dp)//TODO: de schimbat pictograma
+            .setSmallIcon(R.drawable.ic_add_white_24dp)
             .setContentTitle(getString(R.string.app_title))
             .setContentText("Descriere...")
             .setContentIntent(pendingIntent)
@@ -124,12 +110,10 @@ class ServiciuLocalizare : Service() {
     override fun onDestroy() {
         super.onDestroy()
         stopLocalizare()
-        //24.04.2020 - eliminam notificarea
         stopForeground(true)
     }
 
     fun startLocalizare() {
-
         locationRequest.interval = interval
         locationRequest.fastestInterval = fastestInterval
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY

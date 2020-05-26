@@ -52,7 +52,6 @@ class TravelNoteInfoFragment : Fragment(), OnMapReadyCallback {
 
 
         buttonUpdate.setOnClickListener() {
-            note?.Note = editTextNote.text.toString()
             dbRepository?.updateNote(note!!)
             navController.navigate(R.id.allTravelNotesFragment)
         }
